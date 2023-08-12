@@ -16,6 +16,7 @@ Vue.use(ElementUI);
 import router from './router';
 
 import store from './store';
+import './api/mock'
 
 
 
