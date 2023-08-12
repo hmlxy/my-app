@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="auto">
         <NavMenu></NavMenu>
       </el-aside>
       <el-container direction="vertical">
@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import NavMenu from "@/components/NavMenu.vue";
-import NavHeader from "@/components/NavHeader.vue";
+import NavMenu from "@/components/CommonNavAside.vue";
+import NavHeader from "@/components/CommonNavHeader.vue";
 
 export default {
   data() {

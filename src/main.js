@@ -15,11 +15,14 @@ Vue.use(ElementUI);
 // 因为router文件下有index.js文件，所以会自动寻址
 import router from './router';
 
+import store from './store';
+
 
 
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
+  router,//挂载vue-router实例
+  store,//挂载vuex实例
   render: (h) => h(App),
 }).$mount("#app");
