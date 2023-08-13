@@ -104,13 +104,16 @@ export default {
             console.log(key, keyPath);
         },
         clickMenu(item) {
-            console.log(item);
             //   当页面路由与跳转路由不一致时才允许跳转
             if (
                 this.$route.path !== item.path &&
                 !(this.$route.path === "/home" && item.path === "/")
-            )
-                this.$router.push(item.path);
+            ) {
+                this.$router.push({ path: item.path, params: { id: 123 } }); //编程式导航，也就是更改要显示的路由，渲染不同的组件
+            }
+
+            // 使用vuex同步aside和header
+            this.$store.commit("selectMenu", item);
         },
     },
 

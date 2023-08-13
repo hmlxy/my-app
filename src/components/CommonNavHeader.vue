@@ -9,7 +9,16 @@
                 @click="handleMenu"
             ></el-button>
             <!-- 面包屑 -->
-            <span class="left-bread"> 首页 </span>
+            <div class="left-bread">
+                <el-breadcrumb separator="/">
+                    <el-breadcrumb-item
+                        v-for="item in tags"
+                        :key="item.path"
+                        :to="{ path: item.path }"
+                        >{{ item.label }}</el-breadcrumb-item
+                    >
+                </el-breadcrumb>
+            </div>
         </div>
 
         <div class="nav-right">
@@ -27,15 +36,22 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
     data() {
         return {};
     },
     methods: {
-        handleMenu(){
-            this.$store.commit('collapseMenu')
-        }
-    }
+        handleMenu() {
+            this.$store.commit("collapseMenu");
+        },
+    },
+    computed: {
+        ...mapState({
+            tags: (state) => state.tab.tabList,
+        }),
+    },
+    mounted() {},
 };
 </script>
 
@@ -48,10 +64,26 @@ export default {
     height: 60px;
     background-color: #333;
     .nav-left {
+        display: flex;
+        align-items: center;
         .left-bread {
             margin-left: 20px;
             font-size: 14px;
             color: #fff;
+
+            /deep/.el-breadcrumb__item {
+                .el-breadcrumb__inner {
+                    font-size: 16px;
+                    &.is-link {
+                        color: #666;
+                    }
+                }
+                &:last-child {
+                    .el-breadcrumb__inner {
+                        color: orange;
+                    }
+                }
+            }
         }
     }
 

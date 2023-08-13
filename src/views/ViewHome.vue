@@ -60,6 +60,7 @@
                 </el-card>
 
                 <div class="graph">
+                    <p></p>
                     <!-- 柱状图 -->
                     <el-card shadow="hover" class="card-zhu">
                         <div class="echartsZhu" ref="echartsZhu"></div>
@@ -130,10 +131,11 @@ export default {
         };
     },
     mounted() {
+        console.log("this is home route", this.$route);
         // 获取数据使用echarts渲染图例
         getData().then(({ data }) => {
             const { tableData } = data.data;
-            console.log(data.data);
+
             // 将动态数据传给定义的tableData
             this.tableData = tableData;
 
@@ -158,7 +160,7 @@ export default {
                     type: "line",
                 });
             });
-            console.log(opitonLine);
+
             // 根据实例配置和数据显示图表
             echartsLine.setOption(opitonLine);
 
@@ -222,25 +224,17 @@ export default {
                 tooltip: {
                     trigger: "item",
                 },
-                color: [
-                    "green",
-                    "red",
-                    "orange",
-                    "blue",
-                   
-                ],
+                color: ["green", "red", "orange", "blue"],
                 series: [
                     {
                         data: videoData,
-                        type: 'pie',
-
-                    }
-                    
+                        type: "pie",
+                    },
                 ],
             };
 
             // 使用配置和数据显示图例
-            echartsBin.setOption(optionBin)
+            echartsBin.setOption(optionBin);
         });
     },
 };
@@ -335,7 +329,6 @@ export default {
     .el-card {
         height: 200px;
         width: 48%;
-        
     }
     .echartsZhu {
         height: 220px;
