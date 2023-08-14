@@ -60,7 +60,6 @@
                 </el-card>
 
                 <div class="graph">
-                    <p></p>
                     <!-- 柱状图 -->
                     <el-card shadow="hover" class="card-zhu">
                         <div class="echartsZhu" ref="echartsZhu"></div>
@@ -134,6 +133,8 @@ export default {
         console.log("this is home route", this.$route);
         // 获取数据使用echarts渲染图例
         getData().then(({ data }) => {
+            // 使用解构语法获取对象中特定的属性
+            // 等价于const tableData = data.data.tableData;
             const { tableData } = data.data;
 
             // 将动态数据传给定义的tableData
@@ -145,6 +146,7 @@ export default {
             var opitonLine = {};
             // 处理数据xAxis
             const { orderData, userData, videoData } = data.data;
+            // Object.keys()返回对象的所有可枚举属性
             const xAxis = Object.keys(orderData.data[0]);
             const xAxisData = {
                 data: xAxis,
@@ -156,6 +158,7 @@ export default {
             xAxis.forEach((key) => {
                 opitonLine.series.push({
                     name: key,
+                    // map返回key对应的值组成的新数组
                     data: orderData.data.map((item) => item[key]),
                     type: "line",
                 });
@@ -282,8 +285,7 @@ export default {
 }
 
 .card-mall {
-    margin-top: 30px;
-    height: 350px;
+    margin-top: 94px;
 }
 
 .count {
@@ -316,26 +318,35 @@ export default {
     }
 }
 
-.card-line {
+/deep/.card-line {
     height: 220px;
     .echartsLine {
-        height: 240px;
+        height: 200px;
+    }
+    .el-card__body {
+        padding-top: 20px;
     }
 }
 .graph {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
-    .el-card {
+    margin-top: 10px;
+
+    // 对于没有标注data-v的标签需要使用deep穿透
+    /deep/.el-card {
         height: 200px;
-        width: 48%;
+        width: 50%;
+        padding: 0;
+        .el-card__body {
+            padding-top: 20px;
+        }
     }
     .echartsZhu {
-        height: 220px;
+        height: 180px;
     }
 
     .echartsBin {
-        height: 200px;
+        height: 180px;
     }
 }
 </style>

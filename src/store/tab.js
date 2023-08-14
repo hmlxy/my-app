@@ -30,5 +30,14 @@ export default {
                 }
             }
         },
+        // 点击关闭tag
+        closeTag(state, item) {
+            console.log("数据", item);
+            // 获取当前数据在tabList的索引
+            const index = state.tabList.findIndex(
+                (val) => val.name === item.name
+            );
+            state.tabList.splice(index, 1);
+        },
     },
 };

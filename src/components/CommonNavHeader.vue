@@ -10,11 +10,12 @@
             ></el-button>
             <!-- 面包屑 -->
             <div class="left-bread">
+                <!-- 对于to为null时，就不跳转了 -->
                 <el-breadcrumb separator="/">
                     <el-breadcrumb-item
                         v-for="item in tags"
                         :key="item.path"
-                        :to="{ path: item.path }"
+                        :to="shouldNavigate(item) ? { path: item.path } : null"
                         >{{ item.label }}</el-breadcrumb-item
                     >
                 </el-breadcrumb>
@@ -39,11 +40,23 @@
 import { mapState } from "vuex";
 export default {
     data() {
-        return {};
+        return {
+            path: " ",
+        };
     },
     methods: {
         handleMenu() {
+            // this.$store.commit执行mutations中的collapseMenu方法
             this.$store.commit("collapseMenu");
+        },
+        // 如果不是跳转相同路径，并且不是从/home跳转到/,就返回真值
+        shouldNavigate(item) {
+            if (
+                this.$route.path !== item.path &&
+                !(this.$route.path === "/home" && item.path === "/")
+            ) {
+                return true;
+            }
         },
     },
     computed: {
@@ -51,7 +64,6 @@ export default {
             tags: (state) => state.tab.tabList,
         }),
     },
-    mounted() {},
 };
 </script>
 
@@ -71,18 +83,16 @@ export default {
             font-size: 14px;
             color: #fff;
 
-            /deep/.el-breadcrumb__item {
-                .el-breadcrumb__inner {
-                    font-size: 16px;
-                    &.is-link {
-                        color: #666;
-                    }
-                }
-                &:last-child {
-                    .el-breadcrumb__inner {
-                        color: orange;
-                    }
-                }
+            // /deep/.el-breadcrumb__item {
+            //     .el-breadcrumb__inner {
+            //         &.is-link {
+            //             color: #c3c2c2;
+            //         }
+            //     }
+            // }
+            /deep/.el-breadcrumb__inner {
+                color: #c3c2c2;
+                cursor: pointer;
             }
         }
     }

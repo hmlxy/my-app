@@ -109,10 +109,10 @@ export default {
                 this.$route.path !== item.path &&
                 !(this.$route.path === "/home" && item.path === "/")
             ) {
-                this.$router.push({ path: item.path, params: { id: 123 } }); //编程式导航，也就是更改要显示的路由，渲染不同的组件
+                this.$router.push({ path: item.path }); //编程式导航，也就是更改要显示的路由，渲染不同的组件
             }
 
-            // 使用vuex同步aside和header
+            // 调用selectMenu方法提交修改共同状态属性
             this.$store.commit("selectMenu", item);
         },
     },
@@ -126,7 +126,9 @@ export default {
         hasChildren() {
             return this.menuData.filter((item) => item.children);
         },
-        // 折叠的store.state共用
+        // 从vuex的状态管理中获取isCollapse，从而实现另一个组件修改而这里改变的功能
+        // this.$store.state获取所有store模块
+        // tab.isCollapse获取tab模块里的定义在state中的属性isCollapse
         isCollapse() {
             return this.$store.state.tab.isCollapse;
         },
