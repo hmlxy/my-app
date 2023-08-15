@@ -130,7 +130,6 @@ export default {
         };
     },
     mounted() {
-        console.log("this is home route", this.$route);
         // 获取数据使用echarts渲染图例
         getData().then(({ data }) => {
             // 使用解构语法获取对象中特定的属性

@@ -74,7 +74,7 @@ export default {
                     url: "ViewUserManage/ViewUserManage",
                 },
                 {
-                    label: "其他",
+                    label: "更多",
                     icon: "location",
                     children: [
                         {
@@ -97,12 +97,8 @@ export default {
         };
     },
     methods: {
-        handleOpen(key, keyPath) {
-            console.log(key, keyPath);
-        },
-        handleClose(key, keyPath) {
-            console.log(key, keyPath);
-        },
+        handleOpen(key, keyPath) {},
+        handleClose(key, keyPath) {},
         clickMenu(item) {
             //   当页面路由与跳转路由不一致时才允许跳转
             if (
