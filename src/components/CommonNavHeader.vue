@@ -23,13 +23,17 @@
         </div>
 
         <div class="nav-right">
-            <el-dropdown placement="bottom">
+            <el-dropdown
+                trigger="click"
+                placement="bottom"
+                @command="handleClick"
+            >
                 <span class="el-dropdown-link">
                     <img class="head-img" src="@/assets/images/me.jpg" alt="" />
                 </span>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item>个人中心</el-dropdown-item>
-                    <el-dropdown-item>退出</el-dropdown-item>
+                    <el-dropdown-item command="logout">退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -38,6 +42,7 @@
 
 <script>
 import { mapState } from "vuex";
+import Cookie from "js-cookie";
 export default {
     data() {
         return {
@@ -56,6 +61,16 @@ export default {
                 !(this.$route.path === "/home" && item.path === "/")
             ) {
                 return true;
+            }
+        },
+        // 登出
+        handleClick(command) {
+            if (command === "logout") {
+                // 清除cookie中的数据
+                Cookie.remove("token");
+                Cookie.remove("menu");
+                // 跳转到登录页面
+                this.$router.push("login");
             }
         },
     },

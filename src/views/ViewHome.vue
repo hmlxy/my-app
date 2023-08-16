@@ -78,6 +78,7 @@
 import { getData } from "@/api";
 import * as echarts from "echarts";
 export default {
+    name: "ViewHome",
     data() {
         return {
             tableData: [],

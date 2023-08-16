@@ -264,7 +264,7 @@ export default {
             this.dialogVisible = true;
         },
 
-        // 获取列表数据
+        // 重新获取数据并更新页面
         getList() {
             // 获取列表数据
             getUser({ params: { ...this.userForm, ...this.pageData } }).then(

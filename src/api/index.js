@@ -26,3 +26,8 @@ export const deleteUser = (data) => {
 export const editUser = (data) => {
     return http.post("/user/edit", data);
 };
+
+// post登录接口
+export const getMenu = (data) => {
+    return http.post("/permission/getMenu", data);
+};

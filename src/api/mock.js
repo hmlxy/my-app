@@ -4,6 +4,8 @@ import homeApi from "./mockServerData/home";
 
 import userApi from "./mockServerData/user";
 
+import permissionApi from "./mockServerData/permission";
+
 // 定义mcok请求拦截
 Mock.mock("/api/home/getData", homeApi.getStatisticalData);
 
@@ -17,3 +19,6 @@ Mock.mock("/api/user/delete", "post", userApi.deleteUser);
 // 用户列表
 // 这里使用正则表达式匹配url的开头，因为带上参数后难以匹配
 Mock.mock(/api\/user\/getUser/, "get", userApi.getUserList);
+
+// 定义登录接口
+Mock.mock(/api\/permission\/getMenu/, "post", permissionApi.getMenu);

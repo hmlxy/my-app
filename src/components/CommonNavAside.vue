@@ -48,53 +48,10 @@
 </template>
 
 <script>
+import Cookie from "js-cookie";
 export default {
     data() {
-        return {
-            menuData: [
-                {
-                    path: "/",
-                    name: "home",
-                    label: "首页",
-                    icon: "s-home",
-                    url: "ViewHome/ViewHome",
-                },
-                {
-                    path: "/mall",
-                    name: "mall",
-                    label: "商品管理",
-                    icon: "video-play",
-                    url: "ViewMallManage/ViewMallManage",
-                },
-                {
-                    path: "/user",
-                    name: "user",
-                    label: "用户管理",
-                    icon: "user",
-                    url: "ViewUserManage/ViewUserManage",
-                },
-                {
-                    label: "更多",
-                    icon: "location",
-                    children: [
-                        {
-                            path: "/page1",
-                            name: "page1",
-                            label: "页面1",
-                            icon: "setting",
-                            url: "ViewOther/ViewPageOne",
-                        },
-                        {
-                            path: "/page2",
-                            name: "page2",
-                            label: "页面2",
-                            icon: "setting",
-                            url: "ViewOther/ViewPageTwo",
-                        },
-                    ],
-                },
-            ],
-        };
+        return {};
     },
     methods: {
         handleOpen(key, keyPath) {},
@@ -127,6 +84,11 @@ export default {
         // tab.isCollapse获取tab模块里的定义在state中的属性isCollapse
         isCollapse() {
             return this.$store.state.tab.isCollapse;
+        },
+
+        menuData() {
+            // 如果cookie缓存中没有,从当前的store获取
+            return JSON.parse(Cookie.get("menu")) || this.$store.state.tab.menu;
         },
     },
 };
